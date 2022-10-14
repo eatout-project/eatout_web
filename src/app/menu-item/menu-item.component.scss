@@ -1,0 +1,28 @@
+.menuitemcard {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: white;
+  margin-bottom: 10px;
+  width: 100%;
+
+  > img {
+    width: 8rem;
+    height: 8rem;
+    margin-left: 5px;
+    border-radius: 100px;
+  }
+
+  &__image {
+    width: 25%;
+    height: 100%;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 1rem;
+  }
+}
