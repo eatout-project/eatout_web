@@ -1,8 +1,10 @@
-import {Category} from "./Category";
+import {Menu} from "./Menu";
+import {Address} from "./Address";
 
 export interface Restaurant {
-  image: string;
   name: string;
   description: string;
-  categories: Category[];
+  image: string;
+  menu: Menu;
+  address?: Address;
 }

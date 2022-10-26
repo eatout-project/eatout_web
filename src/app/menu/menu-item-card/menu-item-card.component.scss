@@ -1,0 +1,11 @@
+.menu-item-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+app-menu-item {
+  width: 100%;
+}

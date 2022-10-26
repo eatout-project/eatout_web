@@ -10,7 +10,9 @@ export class RestaurantStoreService {
     image: '',
     name: '',
     description: '',
-    categories: []
+    menu: {
+      categories: []
+    }
   }
 
   constructor() { }

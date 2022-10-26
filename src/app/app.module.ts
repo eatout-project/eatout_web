@@ -1,37 +1,25 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { FrontpageComponent } from './pages/frontpage/frontpage.component';
-import { FrontpageTopbarComponent } from './components/frontpage_components/frontpage-topbar/frontpage-topbar.component';
-import { FrontpageMainComponent } from './components/frontpage_components/frontpage-main/frontpage-main.component';
-import { FrontpageMainTopicSelectorComponent } from './components/frontpage_components/frontpage-main-topic-selector/frontpage-main-topic-selector.component';
-import { FrontpageMainBrowsingComponent } from './frontpage-main-browsing/frontpage-main-browsing.component';
-import { RestaurantComponent } from './restaurant/restaurant.component';
-import { ButtonComponent } from './button/button.component';
-import { RestaurantpageComponent } from './restaurantpage/restaurantpage.component';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppComponent} from './app.component';
+import {FrontpageComponent} from './frontpage/frontpage_component/frontpage.component';
+import {TopbarComponent} from './shared/topbar/topbar.component';
+import {RestaurantComponent} from './restaurantpage/restaurant/restaurant.component';
+import {ButtonComponent} from './ui-components/button/button.component';
+import {RestaurantpageComponent} from './restaurantpage/restaurantpage_component/restaurantpage.component';
 import {RouterModule} from "@angular/router";
-import { MainnavbarComponent } from './mainnavbar/mainnavbar.component';
-import { RestaurantbannerComponent } from './restaurantbanner/restaurantbanner.component';
-import { RestaurantDescriptionAreaComponent } from './restaurant-description-area/restaurant-description-area.component';
-import { MenuItemComponent } from './menu-item/menu-item.component';
-import { MenuItemCardComponent } from './menu-item-card/menu-item-card.component';
+import {MenuItemComponent} from './menu/menu-item/menu-item.component';
+import {MenuItemCardComponent} from './menu/menu-item-card/menu-item-card.component';
+import {HttpClientModule} from "@angular/common/http";
+import {RestaurantSearchFacade} from "./restaurant_search/restaurant-search.facade";
 
 @NgModule({
   declarations: [
     AppComponent,
     FrontpageComponent,
-    FrontpageTopbarComponent,
-    FrontpageMainComponent,
-    FrontpageMainTopicSelectorComponent,
-    FrontpageMainBrowsingComponent,
+    TopbarComponent,
     RestaurantComponent,
     ButtonComponent,
     RestaurantpageComponent,
-    MainnavbarComponent,
-    RestaurantbannerComponent,
-    RestaurantDescriptionAreaComponent,
     MenuItemComponent,
     MenuItemCardComponent
   ],
@@ -40,9 +28,12 @@ import { MenuItemCardComponent } from './menu-item-card/menu-item-card.component
     RouterModule.forRoot([
       { path: '', component: FrontpageComponent },
       { path: 'restaurantpage', component: RestaurantpageComponent },
-    ])
+    ]),
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    RestaurantSearchFacade
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

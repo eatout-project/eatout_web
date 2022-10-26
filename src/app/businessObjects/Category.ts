@@ -1,6 +1,6 @@
-import {MenuItem} from "./MenuItem";
+import {CategoryItem} from "./CategoryItem";
 
 export interface Category {
-  name: string;
-  items: MenuItem[]
+  title: string;
+  items: CategoryItem[]
 }
