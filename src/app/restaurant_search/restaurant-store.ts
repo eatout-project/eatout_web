@@ -11,7 +11,7 @@ export class RestaurantStore {
   private restaurantMap$ = this.restaurantMapSource.asObservable();
 
   constructor(private restaurantApi: RestaurantSearchApi) {
-    this.refresh;
+    this.refresh();
   }
 
   public refresh(): void {

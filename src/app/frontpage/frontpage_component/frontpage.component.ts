@@ -16,7 +16,7 @@ export class FrontpageComponent implements OnInit {
   private onDestroyed$ = new Subject();
 
   constructor(
-    private restaurantSearchFacade: RestaurantSearchFacade
+    private restaurantSearchFacade: RestaurantSearchFacade,
   ) {
     this.restaurantsObservable = this.restaurantSearchFacade.getBrowsingList();
     this.restaurantsObservable.pipe(takeUntil(this.onDestroyed$)).subscribe(restaurants => {
@@ -27,7 +27,6 @@ export class FrontpageComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

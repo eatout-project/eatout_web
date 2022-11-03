@@ -6,11 +6,11 @@ import {addressTotring} from "../../businessObjects/Address";
 
 @Component({
   selector: 'app-restaurant',
-  templateUrl: './restaurant.component.html',
-  styleUrls: ['./restaurant.component.scss']
+  templateUrl: './restaurant-card.component.html',
+  styleUrls: ['./restaurant-card.component.scss']
 })
 
-export class RestaurantComponent implements OnInit, OnDestroy {
+export class RestaurantCardComponent implements OnInit, OnDestroy {
 
   @Input() restaurant: Restaurant = {
     image: '',
@@ -28,12 +28,17 @@ export class RestaurantComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  selectRestaurant(restaurant: Restaurant): void {
-    console.log(restaurant)
+  goToRestaurantPage(restaurant: Restaurant): void {
     this.restaurantStoreService.storeSelctedrestaurant(restaurant);
     this.router.navigate(['./restaurantpage']);
   }
 
+  goToReservationPage(restaurant: Restaurant) {
+    this.restaurantStoreService.storeSelctedrestaurant(restaurant);
+    this.router.navigate(['./reservationpage']);
+  }
+
   ngOnDestroy(): void {
   }
+
 }

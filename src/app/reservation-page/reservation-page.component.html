@@ -1,0 +1,39 @@
+<div class="reservation-page">
+  <div class="form-container">
+    <form class="form-impl" [formGroup]="reservationForm">
+      <p>
+        <mat-form-field appearance="standard">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name" placeholder="Placeholder" [value]="customer ? customer.name : ''" (change)="timeChange($event)">
+          <mat-hint>The name that the restaurant will know you by</mat-hint>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="standard">
+          <mat-label>Amount of guests</mat-label>
+          <input matInput type="number" formControlName="amountOfGuests" placeholder="Placeholder" [value]="customer ? customer.name : ''">
+          <mat-hint>How many guests you will show up</mat-hint>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="standard">
+          <mat-label>Date</mat-label>
+          <input matInput formControlName="date" [matDatepicker]="picker" (change)="timeChange($event)">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </p>
+      <p>
+        <ngx-mat-timepicker-field [format]="format">
+          <input matInput [ngxMatTimepicker]="$any(picker1)" formControlName="time" (change)="timeChange($event)">
+          <ngx-mat-timepicker #picker1 (timeSet)="timeEvent"></ngx-mat-timepicker>
+        </ngx-mat-timepicker-field>
+      </p>
+      <button mat-button (click)="handleSubmit()">
+        Request reservation
+      </button>
+    </form>
+  </div>
+</div>
