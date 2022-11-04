@@ -4,7 +4,7 @@
       <p>
         <mat-form-field appearance="standard">
           <mat-label>Name</mat-label>
-          <input matInput type="text" formControlName="name" placeholder="Placeholder" [value]="customer ? customer.name : ''" (change)="timeChange($event)">
+          <input matInput type="text" formControlName="name" placeholder="Placeholder" [value]="customer ? customer.name : ''">
           <mat-hint>The name that the restaurant will know you by</mat-hint>
         </mat-form-field>
       </p>
@@ -19,17 +19,14 @@
       <p>
         <mat-form-field appearance="standard">
           <mat-label>Date</mat-label>
-          <input matInput formControlName="date" [matDatepicker]="picker" (change)="timeChange($event)">
+          <input matInput formControlName="date" [matDatepicker]="datepicker">
           <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker></mat-datepicker>
         </mat-form-field>
       </p>
       <p>
-        <ngx-mat-timepicker-field [format]="format">
-          <input matInput [ngxMatTimepicker]="$any(picker1)" formControlName="time" (change)="timeChange($event)">
-          <ngx-mat-timepicker #picker1 (timeSet)="timeEvent"></ngx-mat-timepicker>
-        </ngx-mat-timepicker-field>
+        <nz-time-picker formControlName="time" [nzDefaultOpenValue]="defaultOpenValue"></nz-time-picker>
       </p>
       <button mat-button (click)="handleSubmit()">
         Request reservation

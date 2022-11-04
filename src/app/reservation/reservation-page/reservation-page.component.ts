@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
-import {CustomerStore} from "../customer/customer-store";
-import {Customer} from "../businessObjects/Customer";
+import {CustomerStore} from "../../customer/customer-store";
+import {Customer} from "../../businessObjects/Customer";
 import {Subject, take, takeUntil} from "rxjs";
 import {FormBuilder} from "@angular/forms";
 
@@ -19,18 +19,29 @@ export interface reservationApiObject {
 export class ReservationPageComponent implements OnInit {
   customer: Customer | undefined;
   format: number = 24;
+  selectedTime: string | undefined;
 
   timeEvent: EventEmitter<string> = new EventEmitter<string>();
   onDestroyed$ = new Subject<void>();
 
   constructor(private customerStore: CustomerStore, private formBuilder: FormBuilder) {}
 
+  today = new Date();
+  month = this.today.getMonth();
+  year = this.today.getFullYear();
+  day = this.today.getDay();
+  hour = this.today.getHours();
+  minutes = this.today.getMinutes();
+  time: Date = new Date();
+
   reservationForm = this.formBuilder.group({
     name: [''],
     amountOfGuests: [],
-    date: [],
-    time: []
+    date: new Date(this.year, this.month, this.day),
+    time: new Date(this.year, this.month, this.day, this.hour, this.minutes + 15),
   })
+
+  defaultOpenValue = this.today;
 
   ngOnInit(): void {
     this.customerStore.getCustomerMapChanges().pipe(take(1))
@@ -41,14 +52,18 @@ export class ReservationPageComponent implements OnInit {
       .subscribe(value => {
         console.log(value);
       })
+    this.reservationForm.valueChanges.pipe(takeUntil(this.onDestroyed$))
+      .subscribe(value => {
+        if (value.time) {
+          console.log(value);
+        }
+      })
   }
 
   handleSubmit(): void {
-
-  }
-
-  timeChange($event: Event) {
-    console.log(this.reservationForm.get('date')?.value);
-    console.log(this.reservationForm.get('time')?.value);
+    if(!this.reservationForm.controls.time.value || !this.reservationForm.controls.date || this.reservationForm.controls.name || !this.reservationForm.controls.amountOfGuests) {
+      alert('Empty fields!');
+      return;
+    }
   }
 }
