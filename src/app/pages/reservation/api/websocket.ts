@@ -22,6 +22,7 @@ export class WebSocketsService {
       console.debug('Going to connect to the websockets server');
       this.connect('ws://localhost:5010', reservation);
     }
+
   }
 
   public stop(): void {
