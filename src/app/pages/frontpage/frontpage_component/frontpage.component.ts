@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {RestaurantSearchFacade} from "../../restaurant_search/restaurant-search.facade";
-import {Restaurant} from "../../businessObjects/Restaurant";
+import {RestaurantSearchFacade} from "../../../restaurant_search/restaurant-search.facade";
+import {Restaurant} from "../../../objects/businessObjects/Restaurant";
 import {BehaviorSubject, Observable, Subject, takeUntil} from "rxjs";
 
 @Component({

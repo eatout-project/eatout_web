@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Observable, ReplaySubject} from "rxjs";
 import {RestaurantSearchApi} from "./api/restaurant-search.api";
-import {Restaurant} from "../businessObjects/Restaurant";
+import {Restaurant} from "../objects/businessObjects/Restaurant";
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable, ReplaySubject} from "rxjs";
-import {Customer} from "../businessObjects/Customer";
+import {Customer} from "../objects/businessObjects/Customer";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class CustomerStore {
   }
 
   public refresh(): void {
-    this.customerMapSource.next({name: 'henrik', id: 1})
+    this.customerMapSource.next({name: 'henrik', id: Math.round(Math.random()*1000)})
   }
 
   public getCustomerMapChanges(): Observable<Customer> {
