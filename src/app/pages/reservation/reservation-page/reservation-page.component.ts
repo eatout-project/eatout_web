@@ -1,7 +1,7 @@
-import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CustomerStore} from "../../../customer/customer-store";
 import {Customer} from "../../../objects/businessObjects/Customer";
-import {Subject, take, takeUntil} from "rxjs";
+import {Subject, take} from "rxjs";
 import {FormBuilder} from "@angular/forms";
 import {RestaurantStoreService} from "../../../restaurant-store.service";
 import {ReservationFacade} from "../reservation.facade";
@@ -20,7 +20,6 @@ export class ReservationPageComponent implements OnInit, OnDestroy {
   customer: Customer | undefined;
   format: number = 24;
 
-  timeEvent: EventEmitter<string> = new EventEmitter<string>();
   onDestroyed$ = new Subject<void>();
 
   constructor(
@@ -51,19 +50,10 @@ export class ReservationPageComponent implements OnInit, OnDestroy {
   defaultOpenValue = this.today;
 
   ngOnInit(): void {
-    console.log(this.today);
     this.customerStore.getCustomerMapChanges().pipe(take(1))
       .subscribe(customer => {
         this.customer = customer
       });
-    this.timeEvent.pipe(takeUntil(this.onDestroyed$))
-      .subscribe(value => {
-        console.log(value);
-      })
-    this.reservationForm.valueChanges.pipe(takeUntil(this.onDestroyed$))
-      .subscribe(value => {
-          console.log(value);
-      })
   }
 
   handleSubmit(): void {
@@ -71,13 +61,12 @@ export class ReservationPageComponent implements OnInit, OnDestroy {
       alert('Empty fields!');
     } else {
       this.customerStore.getCustomerMapChanges().pipe(take(1)).subscribe(customer => {
-        let customerId = customer.id;
-        let customerName = this.reservationForm.controls.name.value;
-        console.log('hey')
+        const customerId = customer.id;
+        const customerName = this.reservationForm.controls.name.value;
         this.restaurantStore.getrestaurantMapChanges().pipe(take(1)).subscribe(restaurant => {
-          console.log('hey2')
-          let restaurantId = restaurant.id;
-          let restaurantName = restaurant.name;
+          const restaurantId = restaurant.id;
+          console.log(restaurantId);
+          const restaurantName = restaurant.name;
           // @ts-ignore
           const time = this.reservationForm.controls.time.value.getTime();
           const timeOfArrival = new Date();
@@ -88,7 +77,6 @@ export class ReservationPageComponent implements OnInit, OnDestroy {
           this.reservationFacade.createReservation({customerId, customerName, restaurantId, restaurantName, timeOfArrival: finalTimeString, amountOfGuests, status: ReservationStatus.WAITING})
             .pipe(take(1)).subscribe(response => {
               const reservation: ReservationApiObject = response;
-              console.log(reservation);
             if (reservation) {
               this.reservationStore.storeReservation(reservation);
               this.router.navigate(['./statuspage']);

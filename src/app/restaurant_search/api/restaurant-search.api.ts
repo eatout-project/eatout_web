@@ -65,7 +65,6 @@ export class RestaurantSearchApi {
         address
       })
     })
-    console.log(restaurants)
     return restaurants;
   }
 

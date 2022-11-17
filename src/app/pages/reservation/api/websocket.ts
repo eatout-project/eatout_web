@@ -44,13 +44,10 @@ export class WebSocketsService {
     };
 
     this.webSocket.onmessage = (messageEvent: MessageEvent) => {
-      console.log(typeof messageEvent.data);
       const jsonReceived: string = messageEvent.data;
-      console.log(jsonReceived)
       if (jsonReceived.includes('customerId')) {
         const response: ReservationApiObject = JSON.parse(jsonReceived);
         this.reservationStore.storeReservation(response);
-        console.log('response: ', response);
       }
     };
 

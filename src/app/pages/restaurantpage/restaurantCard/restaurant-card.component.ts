@@ -12,15 +12,7 @@ import {addressTotring} from "../../../objects/businessObjects/Address";
 
 export class RestaurantCardComponent implements OnInit, OnDestroy {
 
-  @Input() restaurant: Restaurant = {
-    id: 0,
-    image: '',
-    name: '',
-    description: '',
-    menu: {
-      categories: []
-    }
-  };
+  @Input() restaurant: Restaurant | undefined = undefined;
 
   addressToString = addressTotring;
 
@@ -30,6 +22,7 @@ export class RestaurantCardComponent implements OnInit, OnDestroy {
   }
 
   goToRestaurantPage(restaurant: Restaurant): void {
+    console.log(restaurant);
     this.restaurantStoreService.storeSelctedrestaurant(restaurant);
     this.router.navigate(['./restaurantpage']);
   }
