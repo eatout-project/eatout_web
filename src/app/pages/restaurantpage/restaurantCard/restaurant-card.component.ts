@@ -1,8 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Restaurant} from "../../businessObjects/Restaurant";
-import {RestaurantStoreService} from "../../restaurant-store.service";
+import {Restaurant} from "../../../objects/businessObjects/Restaurant";
+import {RestaurantStoreService} from "../../../restaurant-store.service";
 import {Router} from "@angular/router";
-import {addressTotring} from "../../businessObjects/Address";
+import {addressTotring} from "../../../objects/businessObjects/Address";
 
 @Component({
   selector: 'app-restaurant',
@@ -12,14 +12,7 @@ import {addressTotring} from "../../businessObjects/Address";
 
 export class RestaurantCardComponent implements OnInit, OnDestroy {
 
-  @Input() restaurant: Restaurant = {
-    image: '',
-    name: '',
-    description: '',
-    menu: {
-      categories: []
-    }
-  };
+  @Input() restaurant: Restaurant | undefined = undefined;
 
   addressToString = addressTotring;
 
@@ -29,6 +22,7 @@ export class RestaurantCardComponent implements OnInit, OnDestroy {
   }
 
   goToRestaurantPage(restaurant: Restaurant): void {
+    console.log(restaurant);
     this.restaurantStoreService.storeSelctedrestaurant(restaurant);
     this.router.navigate(['./restaurantpage']);
   }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Restaurant} from "../../businessObjects/Restaurant";
-import {RestaurantStoreService} from "../../restaurant-store.service";
+import {Restaurant} from "../../../objects/businessObjects/Restaurant";
+import {RestaurantStoreService} from "../../../restaurant-store.service";
+import {take} from "rxjs";
 
 @Component({
   selector: 'app-restaurantpage',
@@ -10,18 +11,17 @@ import {RestaurantStoreService} from "../../restaurant-store.service";
 export class RestaurantpageComponent implements OnInit {
 
   restaurant: Restaurant = {
-    image: '',
+    id: 0,
     name: '',
-    description: '',
-    menu: {
-      categories: []
-    }
-  };
+    description: ''
+  }
 
   constructor(private restaurantStoreService: RestaurantStoreService) {}
 
   ngOnInit(): void {
-    this.restaurant = this.restaurantStoreService.getSelectedRestaurant();
+    this.restaurantStoreService.getrestaurantMapChanges().pipe(take(1)).subscribe(restaurant => {
+      this.restaurant = restaurant;
+    });
   }
 
 }

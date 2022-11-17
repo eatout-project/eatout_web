@@ -4,7 +4,7 @@
     <p class="topic-selector__item" *ngFor="let topic of topics">{{topic}}</p>
   </div>
   <div *ngIf="found | async" class="browsing">
-    <app-restaurant *ngFor="let restaurant of restaurantsObservable | async" [restaurant]="restaurant"></app-restaurant>
+    <app-restaurant *ngFor="let restaurant of restaurants | async" [restaurant]="restaurant"></app-restaurant>
   </div>
   <div *ngIf="!found" class="browsing">
     <p>Sorry, no restaurants in your area</p>

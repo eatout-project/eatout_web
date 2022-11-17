@@ -1,27 +1,21 @@
-import { Injectable } from '@angular/core';
-import {Restaurant} from "./businessObjects/Restaurant";
+import {Injectable} from '@angular/core';
+import {Restaurant} from "./objects/businessObjects/Restaurant";
+import {Observable, ReplaySubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantStoreService {
+  private restaurantMapSource = new ReplaySubject<Restaurant>(1);
+  private restaurantMap$ = this.restaurantMapSource.asObservable();
 
-  restaurant: Restaurant = {
-    image: '',
-    name: '',
-    description: '',
-    menu: {
-      categories: []
-    }
+  constructor() {}
+
+  public storeSelctedrestaurant(restaurant: Restaurant): void {
+    this.restaurantMapSource.next({id: 1, name: 'larsens', description: 'bedsten', image: ''})
   }
 
-  constructor() { }
-
-  storeSelctedrestaurant(restaurant: Restaurant): void {
-    this.restaurant = restaurant;
-  }
-
-  getSelectedRestaurant(): Restaurant {
-    return this.restaurant;
+  public getrestaurantMapChanges(): Observable<Restaurant> {
+    return this.restaurantMap$;
   }
 }

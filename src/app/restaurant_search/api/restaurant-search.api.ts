@@ -1,13 +1,14 @@
 import {Injectable} from "@angular/core";
 import {EatoutHttpClient} from "../../services/eatout-http-client";
 import {map, Observable} from "rxjs";
-import {Restaurant} from "../../businessObjects/Restaurant";
-import {Category} from "../../businessObjects/Category";
-import {Menu} from "../../businessObjects/Menu";
-import {CategoryItem} from "../../businessObjects/CategoryItem";
-import {Address} from "../../businessObjects/Address";
+import {Restaurant} from "../../objects/businessObjects/Restaurant";
+import {Category} from "../../objects/businessObjects/Category";
+import {Menu} from "../../objects/businessObjects/Menu";
+import {CategoryItem} from "../../objects/businessObjects/CategoryItem";
+import {Address} from "../../objects/businessObjects/Address";
 
 interface RestaurantApiObject {
+  id: number;
   name: string;
   description: string;
   menu: RestaurantMenuApiObject;
@@ -42,10 +43,11 @@ export interface RestaurantAddressApiObject {
   providedIn: 'root'
 })
 export class RestaurantSearchApi {
+  port = 5000;
   constructor(private readonly eatoutHttpClientService: EatoutHttpClient) {}
 
   getRestaurants(): Observable<Restaurant[]> {
-    return this.eatoutHttpClientService.get<RestaurantApiObject[]>('browsingList')
+    return this.eatoutHttpClientService.get<RestaurantApiObject[]>(`${this.port}/browsingList`)
       .pipe(map((result) => this.restaurantApiObjectToRestaurant(result)));
   }
 
@@ -55,6 +57,7 @@ export class RestaurantSearchApi {
       const menu = this.restaurantMenuApiObjectToRestaurantMenu(restaurant.menu);
       const address = this.restaurantAddressApiObjectToRestaurantAddress(restaurant.address);
       restaurants.push({
+        id: restaurant.id,
         image: '../../../assets/restaurants/mogens.jpg',
         name: restaurant.name,
         description: restaurant.description,
@@ -62,7 +65,6 @@ export class RestaurantSearchApi {
         address
       })
     })
-    console.log(restaurants)
     return restaurants;
   }
 

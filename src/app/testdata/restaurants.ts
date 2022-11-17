@@ -1,7 +1,8 @@
-import {Restaurant} from "../businessObjects/Restaurant";
+import {Restaurant} from "../objects/businessObjects/Restaurant";
 
 export const restaurants: Restaurant[] = [
   {
+    id: 1,
     image: 'assets/restaurants/bannerExample.avif',
     name: 'Veronikas place',
     description: 'Veronikas place is a lovely place to be',
@@ -77,6 +78,7 @@ export const restaurants: Restaurant[] = [
     }
   },
   {
+    id: 2,
     image: 'assets/restaurants/mogens.jpg',
     name: 'Mogens place',
     description: 'Mogens place is a nice place to be',
@@ -151,6 +153,7 @@ export const restaurants: Restaurant[] = [
     }
   },
   {
+    id: 3,
     image: 'assets/restaurants/signes.jpg',
     name: 'Signes place',
     description: 'Signes place is a colorsome place to be',
@@ -225,6 +228,7 @@ export const restaurants: Restaurant[] = [
     }
   },
   {
+    id: 4,
     image: 'assets/restaurants/henriks.jpg',
     name: 'Henriks place',
     description: 'Henriks place is an exciting place to be',

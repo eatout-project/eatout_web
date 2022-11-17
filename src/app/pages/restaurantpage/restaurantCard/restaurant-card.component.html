@@ -1,4 +1,4 @@
-<div class="restaurantCard">
+<div *ngIf="restaurant" class="restaurantCard">
   <img src="{{restaurant.image}}" alt="alttext" class="restaurantCard__image">
   <div class="restaurantCard__detailsarea">
     <h2>Name: {{restaurant.name}}</h2>
@@ -7,4 +7,7 @@
   </div>
   <button class="restaurantCard__detailsarea--button button" (click)="goToRestaurantPage(restaurant)">Se menu</button>
   <button class="restaurantCard__detailsarea--button button" (click)="goToReservationPage(restaurant)">Reserver bord</button>
+</div>
+<div *ngIf="restaurant === undefined" class="undefined">
+  Failed to fetch restaurant details
 </div>

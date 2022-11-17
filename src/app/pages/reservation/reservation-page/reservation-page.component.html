@@ -17,15 +17,6 @@
         </mat-form-field>
       </p>
       <p>
-        <mat-form-field appearance="standard">
-          <mat-label>Date</mat-label>
-          <input matInput formControlName="date" [matDatepicker]="datepicker">
-          <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-          <mat-datepicker #datepicker></mat-datepicker>
-        </mat-form-field>
-      </p>
-      <p>
         <nz-time-picker formControlName="time" [nzDefaultOpenValue]="defaultOpenValue"></nz-time-picker>
       </p>
       <button mat-button (click)="handleSubmit()">

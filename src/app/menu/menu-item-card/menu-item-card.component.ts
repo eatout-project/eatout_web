@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Category} from "../../businessObjects/Category";
+import {Category} from "../../objects/businessObjects/Category";
 
 @Component({
   selector: 'app-menu-item-card',
