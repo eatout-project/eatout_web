@@ -36,7 +36,6 @@ export class ReservationPageComponent implements OnInit, OnDestroy {
     if (!!storedCustomerString) {
       const customer: Customer = JSON.parse(storedCustomerString);
       this.accountService.verifyAccount(customer.id).pipe(take(1)).subscribe(verified => {
-        console.log(verified);
         if (!verified) {
           localStorage.setItem('customer', '');
           this.router.navigate(['']);

@@ -34,11 +34,9 @@ export class CreateAccountComponent implements OnInit {
     private customerStore: CustomerStore
   ) {
     const storedCustomerString: string | null = localStorage.getItem('customer');
-    console.log('testing: ', storedCustomerString)
     if (!!storedCustomerString) {
       const customer: Customer = JSON.parse(storedCustomerString);
       this.accountService.verifyAccount(customer.id).pipe(take(1)).subscribe(verified => {
-        console.log('verified: ', verified);
         if (verified) {
           this.router.navigate(
             ['/frontPage']

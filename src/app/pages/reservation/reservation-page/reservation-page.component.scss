@@ -1,6 +1,6 @@
 .reservation-page {
   background-color: wheat;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -8,5 +8,6 @@
 
 .form-container {
   background-color: white;
+  height: auto;
   padding: 0 2rem;
 }

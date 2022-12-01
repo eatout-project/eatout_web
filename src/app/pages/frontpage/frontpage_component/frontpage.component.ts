@@ -24,11 +24,9 @@ export class FrontpageComponent implements OnInit {
     private router: Router
   ) {
     const storedCustomerString: string | null = localStorage.getItem('customer');
-    console.log('frontpage: ', storedCustomerString)
     if (!!storedCustomerString) {
       const customer: Customer = JSON.parse(storedCustomerString);
       this.accountService.verifyAccount(customer.id).pipe(take(1)).subscribe(verified => {
-        console.log(verified);
         if (!verified) {
           localStorage.setItem('customer', '');
           this.router.navigate(['']);
@@ -40,7 +38,6 @@ export class FrontpageComponent implements OnInit {
     this.restaurantList = this.restaurantSearchFacade.getBrowsingList();
     this.restaurantList.pipe(takeUntil(this.onDestroyed$)).subscribe(restaurants => {
       if (restaurants.length > 0) {
-        console.log(restaurants);
         this.found.next(true);
       }
     })
