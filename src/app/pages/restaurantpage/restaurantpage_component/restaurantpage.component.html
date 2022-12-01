@@ -1,17 +1,17 @@
 <div class="restaurantPage">
   <app-topbar></app-topbar>
   <picture>
-    <img src="{{restaurant.image}}" alt="alttext" class="restaurantBanner__image" />
+    <img src="{{restaurant?.image}}" alt="alttext" class="restaurantBanner__image" />
   </picture>
   <div class="restaurantDescriptionArea">
     <div class="restaurantDescriptionArea__centerContainer">
-      <h2>{{restaurant.name}}</h2>
+      <h2>{{restaurant?.name}}</h2>
       <ul>
-        <li *ngFor="let category of restaurant.menu?.categories">{{category.title}}</li>
+        <li *ngFor="let category of restaurant?.menu?.categories">{{category.title}}</li>
       </ul>
     </div>
-    <div *ngIf="restaurant.menu?.categories" class="restaurantDescriptionArea__menu">
-      <app-menu-item-card *ngFor="let category of restaurant.menu?.categories" [category]="category"></app-menu-item-card>
+    <div *ngIf="restaurant?.menu?.categories" class="restaurantDescriptionArea__menu">
+      <app-menu-item-card *ngFor="let category of restaurant?.menu?.categories" [category]="category"></app-menu-item-card>
     </div>
   </div>
 </div>

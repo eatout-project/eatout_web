@@ -10,11 +10,7 @@ import {take} from "rxjs";
 })
 export class RestaurantpageComponent implements OnInit {
 
-  restaurant: Restaurant = {
-    id: 0,
-    name: '',
-    description: ''
-  }
+  restaurant: Restaurant | undefined;
 
   constructor(private restaurantStoreService: RestaurantStoreService) {}
 

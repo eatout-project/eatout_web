@@ -20,13 +20,14 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
-import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { da_DK } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
+import {NzTimePickerModule} from 'ng-zorro-antd/time-picker';
+import {da_DK, NZ_I18N} from 'ng-zorro-antd/i18n';
+import {registerLocaleData} from '@angular/common';
 import da from '@angular/common/locales/da';
-import { StatusPageComponent } from './pages/status-page/status-page.component';
+import {StatusPageComponent} from './pages/status-page/status-page.component';
 import {ReservationFacade} from "./pages/reservation/reservation.facade";
+import {LoginComponent} from './pages/account/LoginPage/login/login.component';
+import {CreateAccountComponent} from './pages/account/create-account/create-account.component';
 
 registerLocaleData(da);
 
@@ -41,6 +42,8 @@ registerLocaleData(da);
     MenuItemCardComponent,
     ReservationPageComponent,
     StatusPageComponent,
+    LoginComponent,
+    CreateAccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,9 @@ registerLocaleData(da);
       {path: 'statuspage', component: StatusPageComponent},
       {path: 'restaurantpage', component: RestaurantpageComponent},
       {path: 'reservationpage', component: ReservationPageComponent},
-      {path: '', component: FrontpageComponent},
+      {path: 'frontPage', component: FrontpageComponent},
+      {path: 'login', component: LoginComponent},
+      {path: '', component: CreateAccountComponent},
     ]),
     HttpClientModule,
     NoopAnimationsModule,

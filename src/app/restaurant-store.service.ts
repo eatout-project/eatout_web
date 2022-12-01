@@ -12,7 +12,7 @@ export class RestaurantStoreService {
   constructor() {}
 
   public storeSelctedrestaurant(restaurant: Restaurant): void {
-    this.restaurantMapSource.next({id: 1, name: 'larsens', description: 'bedsten', image: ''})
+    this.restaurantMapSource.next(restaurant);
   }
 
   public getrestaurantMapChanges(): Observable<Restaurant> {
