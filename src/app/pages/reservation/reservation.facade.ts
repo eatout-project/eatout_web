@@ -12,8 +12,4 @@ export class ReservationFacade {
   createReservation(reservationRequest: ReservationApiObject): Observable<ReservationResponseApiObject> {
     return this.reservationApi.createReservationRequest(reservationRequest);
   }
-
-  getReservationStatus(customerId: number): Observable<Map<number, ReservationResponseApiObject>>{
-    return this.reservationApi.getReservationResponse(customerId);
-  }
 }
