@@ -9,16 +9,15 @@ import {LoginData} from "../LoginPage/login/login.component";
   providedIn: 'root'
 })
 export class AccountApi {
-  port = 5004;
   constructor(private readonly eatoutHttpClientService: EatoutHttpClient) {}
 
   createAccount(customer: CreateAccountFormObject): Observable<Customer> {
-    return this.eatoutHttpClientService.post<Customer>(`${this.port}/create-account`, customer)
+    return this.eatoutHttpClientService.post<Customer>(`customer-service-cluster-ip-service:5004/create-account`, customer)
       .pipe(take(1), map((result) => result));
   }
 
   login(formData: LoginData) {
-    return this.eatoutHttpClientService.post<Customer>(`${this.port}/login`, formData)
+    return this.eatoutHttpClientService.post<Customer>(`customer-service-cluster-ip-service:5004/login`, formData)
       .pipe(take(1), map(result => result));
   }
 
@@ -26,6 +25,6 @@ export class AccountApi {
     const body = {
       id: customerId
     }
-    return this.eatoutHttpClientService.post<boolean>(`${this.port}/verifyAccount`, body);
+    return this.eatoutHttpClientService.post<boolean>(`customer-service-cluster-ip-service:5004/verifyAccount`, body);
   }
 }

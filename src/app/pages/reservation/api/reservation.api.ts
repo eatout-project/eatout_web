@@ -28,17 +28,16 @@ export interface ReservationResponseApiObject {
   providedIn: 'root'
 })
 export class ReservationApi {
-  port = 5001;
   constructor(private readonly eatoutHttpClientService: EatoutHttpClient) {}
 
   createReservationRequest(reservation: ReservationApiObject): Observable<ReservationResponseApiObject> {
-    return this.eatoutHttpClientService.post<ReservationResponseApiObject>(`${this.port}/createReservationRequest`, reservation)
+    return this.eatoutHttpClientService.post<ReservationResponseApiObject>(`reservation-service-cluster-ip-service:5001/createReservationRequest`, reservation)
       .pipe(map((result) => result));
   }
 
   getReservationResponse(customerId: number): Observable<ReservationResponseApiObject[]> {
     console.log('customerId: ', customerId)
-    return this.eatoutHttpClientService.post<ReservationResponseApiObject[]>(`${this.port}/getReservations`, {id: customerId})
+    return this.eatoutHttpClientService.post<ReservationResponseApiObject[]>(`reservation-service-cluster-ip-service:5001/getReservations`, {id: customerId})
       .pipe(map((result) => result));
   }
 }

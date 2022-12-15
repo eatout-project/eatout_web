@@ -11,16 +11,12 @@ export class EatoutHttpClient {
     private http: HttpClient
   ) {}
 
-  public get<T>(partialUrl: string, params?: Params): Observable<T> {
-    return this.handleErrors(this.http.get<T>(this.url(partialUrl), params));
+  public get<T>(url: string, params?: Params): Observable<T> {
+    return this.handleErrors(this.http.get<T>(url, params));
   }
 
-  public post<T>(partialUrl: string, body: any): Observable<T> {
-    return this.handleErrors(this.http.post<T>(this.url(partialUrl), body));
-  }
-
-  protected url(partialUrl: string): string {
-    return `http://localhost:${partialUrl}`
+  public post<T>(url: string, body: any): Observable<T> {
+    return this.handleErrors(this.http.post<T>(url, body));
   }
 
   private handleErrors<T>(call: Observable<T>): Observable<T> {
