@@ -1,15 +1,14 @@
 import {Injectable} from '@angular/core';
 import {ReservationApiObject} from "./reservation.api";
-import {ReservationStore} from "../../../stores/reservationStore";
 
 @Injectable({
   providedIn: 'root'
 })
-export class WebSocketsService {
+export class CreateReservationWebSocketService {
   // @ts-ignore
   private webSocket: WebSocket;
 
-  constructor(private reservationStore: ReservationStore) {
+  constructor() {
   }
 
   public start(reservation: ReservationApiObject): void {
@@ -30,14 +29,8 @@ export class WebSocketsService {
 
     this.webSocket.onopen = (event: Event) => {
       this.webSocket.send(JSON.stringify(reservation));
-    };
-
-    this.webSocket.onmessage = (messageEvent: MessageEvent) => {
-      const jsonReceived: string = messageEvent.data;
-      if (jsonReceived.includes('customerId')) {
-        const reservation: ReservationApiObject = JSON.parse(jsonReceived);
-        this.reservationStore.storeReservation(reservation);
-      }
+      this.webSocket.close();
+      console.log('in the socket')
     };
 
     this.webSocket.onerror = (event: Event) => {

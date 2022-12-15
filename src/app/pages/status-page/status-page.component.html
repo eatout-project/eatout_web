@@ -1,4 +1,8 @@
 <app-topbar></app-topbar>
-<div>
-  <h2>Status: {{status | async}}</h2>
+<div class="statuspage" *ngIf="reservations | async">
+  <div class="scrollableList">
+    <div class="statuscard" *ngFor="let reservation of reservations | async">
+      status: {{reservation.status}}   restaurant: {{reservation.restaurantName}}   time: {{reservation.timeOfArrival}}
+    </div>
+  </div>
 </div>

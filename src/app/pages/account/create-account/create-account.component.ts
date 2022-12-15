@@ -33,6 +33,10 @@ export class CreateAccountComponent implements OnInit {
     private accountService: Customer_accountService,
     private customerStore: CustomerStore
   ) {
+  }
+
+
+  ngOnInit(): void {
     const storedCustomerString: string | null = localStorage.getItem('customer');
     if (!!storedCustomerString) {
       const customer: Customer = JSON.parse(storedCustomerString);
@@ -46,9 +50,6 @@ export class CreateAccountComponent implements OnInit {
         }
       })
     }
-  }
-
-  ngOnInit(): void {
   }
 
   onSubmit() {

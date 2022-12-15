@@ -47,7 +47,7 @@ export class FrontpageComponent implements OnInit {
   ngOnInit(): void {}
 
   logOut() {
-    localStorage.setItem('customer', '');
+    localStorage.clear();
     this.router.navigate(['']);
   }
 }

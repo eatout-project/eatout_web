@@ -7,9 +7,10 @@ import {RestaurantStoreService} from "../../../restaurant-store.service";
 import {ReservationFacade} from "../reservation.facade";
 import {Router} from "@angular/router";
 import {ReservationStatus} from "../../../enums/enums";
-import {ReservationApiObject} from "../api/reservation.api";
+import {ReservationResponseApiObject} from "../api/reservation.api";
 import {ReservationStore} from "../../../stores/reservationStore";
 import {Customer_accountService} from "../../account/customer_account.service";
+import {CreateReservationWebSocketService} from "../api/createReservationWebSocketService";
 
 
 @Component({
@@ -31,6 +32,7 @@ export class ReservationPageComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private reservationStore: ReservationStore,
     private accountService: Customer_accountService,
+    private ws: CreateReservationWebSocketService
     ) {
     const storedCustomerString: string | null = localStorage.getItem('customer');
     if (!!storedCustomerString) {
@@ -66,6 +68,7 @@ export class ReservationPageComponent implements OnInit, OnDestroy {
     }
 
     const customer: Customer | undefined = this.customerStore.getCustomerMapChanges();
+    console.log('here')
     if (customer) {
       const customerId = customer.id;
       const customerName = this.reservationForm.controls.name.value;
@@ -80,12 +83,15 @@ export class ReservationPageComponent implements OnInit, OnDestroy {
         // @ts-ignore
         this.reservationFacade.createReservation({customerId, customerName, restaurantId, restaurantName, timeOfArrival: JSON.stringify(timeOfArrival), amountOfGuests, status: ReservationStatus.WAITING})
           .pipe(take(1)).subscribe(response => {
-          const reservation: ReservationApiObject = response;
+          console.log('response: ', response);
+          const reservation: ReservationResponseApiObject = response;
           if (!reservation) {
             alert('could not create reservation request');
             this.reservationForm.reset();
             return;
           }
+          console.log(reservation)
+          this.ws.start(reservation);
           this.reservationStore.storeReservation(reservation);
           this.router.navigate(['./statuspage']);
         })
