@@ -1,10 +1,11 @@
+<app-topbar></app-topbar>
 <div class="reservation-page">
   <div class="form-container">
     <form class="form-impl" [formGroup]="reservationForm">
       <p>
         <mat-form-field appearance="standard">
           <mat-label>Name</mat-label>
-          <input matInput type="text" formControlName="name" placeholder="Placeholder" [value]="customer ? customer.name : ''">
+          <input matInput type="text" formControlName="name" placeholder="Placeholder">
           <mat-hint>The name that the restaurant will know you by</mat-hint>
         </mat-form-field>
       </p>
@@ -12,7 +13,7 @@
       <p>
         <mat-form-field appearance="standard">
           <mat-label>Amount of guests</mat-label>
-          <input matInput type="number" formControlName="amountOfGuests" placeholder="Placeholder" [value]="customer ? customer.name : ''">
+          <input matInput type="number" formControlName="amountOfGuests" placeholder="Placeholder">
           <mat-hint>How many guests you will show up</mat-hint>
         </mat-form-field>
       </p>

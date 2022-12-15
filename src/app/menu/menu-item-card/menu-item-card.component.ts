@@ -8,10 +8,7 @@ import {Category} from "../../objects/businessObjects/Category";
 })
 export class MenuItemCardComponent implements OnInit {
 
-  @Input() category: Category = {
-    title: '',
-    items: []
-  };
+  @Input() category: Category | undefined;
 
   constructor() { }
 

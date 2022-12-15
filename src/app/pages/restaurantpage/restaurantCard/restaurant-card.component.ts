@@ -22,7 +22,6 @@ export class RestaurantCardComponent implements OnInit, OnDestroy {
   }
 
   goToRestaurantPage(restaurant: Restaurant): void {
-    console.log(restaurant);
     this.restaurantStoreService.storeSelctedrestaurant(restaurant);
     this.router.navigate(['./restaurantpage']);
   }

@@ -5,8 +5,8 @@
     <p>Description: {{restaurant.description}}</p>
     <p>Address: {{addressToString(restaurant.address!)}}</p>
   </div>
-  <button class="restaurantCard__detailsarea--button button" (click)="goToRestaurantPage(restaurant)">Se menu</button>
-  <button class="restaurantCard__detailsarea--button button" (click)="goToReservationPage(restaurant)">Reserver bord</button>
+  <button class="restaurantCard__detailsarea--button" (click)="goToRestaurantPage(restaurant)">Menu</button>
+  <button class="restaurantCard__detailsarea--button" (click)="goToReservationPage(restaurant)">Book a table</button>
 </div>
 <div *ngIf="restaurant === undefined" class="undefined">
   Failed to fetch restaurant details

@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
-import {ReservationStatus} from "../../../enums/enums";
 import {ReservationApiObject} from "./reservation.api";
-import {ReservationStore} from "../../../services/reservationStore";
+import {ReservationStore} from "../../../stores/reservationStore";
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +9,7 @@ export class WebSocketsService {
   // @ts-ignore
   private webSocket: WebSocket;
 
-  private responseSubject: Subject<ReservationStatus>;
-
   constructor(private reservationStore: ReservationStore) {
-    this.responseSubject = new Subject<any>();
   }
 
   public start(reservation: ReservationApiObject): void {
@@ -22,7 +17,6 @@ export class WebSocketsService {
       console.debug('Going to connect to the websockets server');
       this.connect('ws://localhost:5010', reservation);
     }
-
   }
 
   public stop(): void {
@@ -31,23 +25,18 @@ export class WebSocketsService {
     }
   }
 
-  public getStatusChanges(): Observable<ReservationStatus> {
-    return this.responseSubject;
-  }
-
   private connect(partialUrl: string, reservation: ReservationApiObject): void {
     this.webSocket = new WebSocket(partialUrl);
 
     this.webSocket.onopen = (event: Event) => {
-      console.info('WebSocket connection has been opened: %o', event);
       this.webSocket.send(JSON.stringify(reservation));
     };
 
     this.webSocket.onmessage = (messageEvent: MessageEvent) => {
       const jsonReceived: string = messageEvent.data;
       if (jsonReceived.includes('customerId')) {
-        const response: ReservationApiObject = JSON.parse(jsonReceived);
-        this.reservationStore.storeReservation(response);
+        const reservation: ReservationApiObject = JSON.parse(jsonReceived);
+        this.reservationStore.storeReservation(reservation);
       }
     };
 
