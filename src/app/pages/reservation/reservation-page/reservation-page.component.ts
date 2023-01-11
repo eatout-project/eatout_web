@@ -92,7 +92,6 @@ export class ReservationPageComponent implements OnInit, OnDestroy {
           }
           console.log(reservation)
           this.ws.start(reservation);
-          this.reservationStore.storeReservation(reservation);
           this.router.navigate(['./statuspage']);
         })
       })

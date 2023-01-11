@@ -45,8 +45,13 @@ export interface RestaurantAddressApiObject {
 export class RestaurantSearchApi {
   constructor(private readonly eatoutHttpClientService: EatoutHttpClient) {}
 
+  // getRestaurants(): Observable<Restaurant[]> {
+  //   return this.eatoutHttpClientService.get<RestaurantApiObject[]>(`restaurant-service-cluster-ip-service:5000/browsingList`)
+  //     .pipe(map((result) => this.restaurantApiObjectToRestaurant(result)));
+  // }
+
   getRestaurants(): Observable<Restaurant[]> {
-    return this.eatoutHttpClientService.get<RestaurantApiObject[]>(`restaurant-service-cluster-ip-service:5000/browsingList`)
+    return this.eatoutHttpClientService.get<RestaurantApiObject[]>(`http://localhost:5000/browsinglist`)
       .pipe(map((result) => this.restaurantApiObjectToRestaurant(result)));
   }
 

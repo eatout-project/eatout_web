@@ -28,21 +28,22 @@ export class StatusPageComponent implements OnInit, OnDestroy {
     const storedCustomerString: string | null = localStorage.getItem('customer');
     // @ts-ignore
     const customer: Customer = JSON.parse(storedCustomerString);
-    this.customerId = customer.id;
-    if (!!storedCustomerString) {
-      this.accountService.verifyAccount(customer.id).pipe(take(1)).subscribe(verified => {
-        if (!verified) {
-          localStorage.setItem('customer', '');
-          this.router.navigate(['']);
-        }
-      })
-    } else {
-      this.router.navigate(['']);
-    }
+    this.customerId = customer.id ?? 1;
+    // if (!!storedCustomerString) {
+    //   this.accountService.verifyAccount(customer.id).pipe(take(1)).subscribe(verified => {
+    //     if (!verified) {
+    //       localStorage.setItem('customer', '');
+    //       this.router.navigate(['']);
+    //     }
+    //   })
+    // } else {
+    //   this.router.navigate(['']);
+    // }
   }
 
   ngOnInit(): void {
     this.api.getReservationResponse(this.customerId).pipe(take(1)).subscribe((reservations: ReservationResponseApiObject[]) => {
+      this.reservationStore.storeReservations(reservations);
       this.reservations.next(reservations);
       this.websocketService.start(this.customerId);
     })

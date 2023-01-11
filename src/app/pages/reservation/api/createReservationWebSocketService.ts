@@ -14,7 +14,7 @@ export class CreateReservationWebSocketService {
   public start(reservation: ReservationApiObject): void {
     if (this.webSocket === undefined) {
       console.debug('Going to connect to the websockets server');
-      this.connect('ws://create-reservation-socket-cluster-ip-service:5010', reservation);
+      this.connect('ws://localhost:5010', reservation);
     }
   }
 

@@ -14,7 +14,7 @@ export class StatusPageSocketService {
   }
 
   public start(customerId: number): void {
-    this.connect('ws://status-socket-cluster-ip-service:5013', customerId);
+    this.connect('ws://localhost:5013', customerId);
   }
 
   private connect(partialUrl: string, customerId: number): void {
@@ -26,9 +26,11 @@ export class StatusPageSocketService {
     };
 
     this.webSocket.onmessage = (messageEvent: MessageEvent) => {
-      const jsonReceived: string = messageEvent.data;
+      const jsonReceived: any = messageEvent.data;
+      console.log('websocket data received: ', jsonReceived)
       if (jsonReceived.includes('customerId')) {
         const reservationObj: ReservationResponseApiObject = JSON.parse(jsonReceived);
+        console.log('includes customerID: ', reservationObj)
         this.reservationStore.storeReservation(reservationObj);
       }
     };

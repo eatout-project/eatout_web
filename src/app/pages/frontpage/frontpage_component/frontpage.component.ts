@@ -5,6 +5,7 @@ import {BehaviorSubject, Observable, Subject, take, takeUntil} from "rxjs";
 import {Customer_accountService} from "../../account/customer_account.service";
 import {Customer} from "../../../objects/businessObjects/Customer";
 import {Router} from "@angular/router";
+import {RestaurantStore} from "../../../restaurant_search/restaurant-store";
 
 @Component({
   selector: 'app-frontpage',
@@ -21,7 +22,8 @@ export class FrontpageComponent implements OnInit {
   constructor(
     private restaurantSearchFacade: RestaurantSearchFacade,
     private accountService: Customer_accountService,
-    private router: Router
+    private router: Router,
+    private restaurantStore: RestaurantStore
   ) {
     const storedCustomerString: string | null = localStorage.getItem('customer');
     if (!!storedCustomerString) {
@@ -35,7 +37,7 @@ export class FrontpageComponent implements OnInit {
     } else {
       this.router.navigate(['']);
     }
-    this.restaurantList = this.restaurantSearchFacade.getBrowsingList();
+    this.restaurantList = this.restaurantStore.getRestaurantMapChanges();
     this.restaurantList.pipe(takeUntil(this.onDestroyed$)).subscribe(restaurants => {
       if (restaurants.length > 0) {
         this.found.next(true);
