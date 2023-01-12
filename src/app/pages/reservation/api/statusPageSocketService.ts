@@ -22,7 +22,7 @@ export class StatusPageSocketService {
 
     this.webSocket.onopen = (event: Event) => {
       this.webSocket.send(JSON.stringify(customerId));
-      console.log('in the socket')
+      console.log('in the status socket');
     };
 
     this.webSocket.onmessage = (messageEvent: MessageEvent) => {
@@ -30,8 +30,7 @@ export class StatusPageSocketService {
       console.log('websocket data received: ', jsonReceived)
       if (jsonReceived.includes('customerId')) {
         const reservationObj: ReservationResponseApiObject = JSON.parse(jsonReceived);
-        console.log('includes customerID: ', reservationObj)
-        this.reservationStore.storeReservation(reservationObj);
+        this.reservationStore.updateReservationStatus(reservationObj);
       }
     };
 

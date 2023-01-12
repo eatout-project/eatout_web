@@ -83,14 +83,13 @@ export class ReservationPageComponent implements OnInit, OnDestroy {
         // @ts-ignore
         this.reservationFacade.createReservation({customerId, customerName, restaurantId, restaurantName, timeOfArrival: JSON.stringify(timeOfArrival), amountOfGuests, status: ReservationStatus.WAITING})
           .pipe(take(1)).subscribe(response => {
-          console.log('response: ', response);
+          console.log('store in db response: ', response);
           const reservation: ReservationResponseApiObject = response;
           if (!reservation) {
             alert('could not create reservation request');
             this.reservationForm.reset();
             return;
           }
-          console.log(reservation)
           this.ws.start(reservation);
           this.router.navigate(['./statuspage']);
         })

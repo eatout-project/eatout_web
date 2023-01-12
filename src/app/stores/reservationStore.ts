@@ -12,48 +12,22 @@ export class ReservationStore {
   constructor() {
   }
 
-  public storeReservation(reservation: ReservationResponseApiObject): void {
-    console.log('new reservation: ', reservation);
+  public updateReservationStatus(reservation: ReservationResponseApiObject): void {
+    console.log('updateReservationStatus(): ', reservation);
     this.getReservationMapChanges().pipe(take(1)).subscribe(reservations => {
-      console.log('stored reservations: ', reservations)
-      if (reservations.length) {
-        console.log('length is true')
-        reservations.forEach((storedReservation, index) => {
-          if (storedReservation.id === reservation.id) {
-            reservations[index] = reservation;
-          }
-        })
-      } else {
-        reservations.push(reservation);
-      }
-      console.log('reservations: ', reservations);
+
+      reservations.forEach((storedReservation, index) => {
+        if (storedReservation.id === reservation.id) {
+          reservations[index] = reservation;
+        }
+      })
+
       this.reservationMapSource.next(reservations);
     })
   }
 
   public storeReservations(reservations2: ReservationResponseApiObject[]): void {
-    console.log('new reservation: ', reservations2);
-    this.getReservationMapChanges().pipe(take(1)).subscribe(reservations => {
-      console.log('stored reservations: ', reservations)
-      if (reservations.length) {
-        console.log('length is true')
-        for (let i = 0; i <reservations.length; i++) {
-          for (let j = 0; j < reservations2.length; j++) {
-            const storedReservation = reservations[i];
-            const newReservation = reservations2[j];
-            if (storedReservation.id === newReservation.id) {
-              reservations[i] = newReservation;
-            }
-          }
-        }
-      } else {
-        reservations2.forEach(reservation => {
-          reservations.push(reservation);
-        })
-      }
-      console.log('reservations: ', reservations);
-      this.reservationMapSource.next(reservations);
-    })
+    this.reservationMapSource.next(reservations2);
   }
 
   public getReservationMapChanges(): Observable<ReservationResponseApiObject[]> {

@@ -5,21 +5,21 @@ import {ReservationApiObject} from "./reservation.api";
   providedIn: 'root'
 })
 export class CreateReservationWebSocketService {
-  // @ts-ignore
-  private webSocket: WebSocket;
+  private webSocket: WebSocket | undefined;
 
   constructor() {
   }
 
   public start(reservation: ReservationApiObject): void {
     if (this.webSocket === undefined) {
-      console.debug('Going to connect to the websockets server');
+      console.log('Going to connect to the CreateReservationWebSocketService server');
       this.connect('ws://localhost:5010', reservation);
     }
   }
 
   public stop(): void {
-    if (this.webSocket != null) {
+    if (this.webSocket) {
+      console.log('stopping CreateReservationWebSocketService ')
       this.webSocket.close();
     }
   }
@@ -28,17 +28,21 @@ export class CreateReservationWebSocketService {
     this.webSocket = new WebSocket(partialUrl);
 
     this.webSocket.onopen = (event: Event) => {
+      console.log('in the CreateReservationWebSocketService socket')
+      // @ts-ignore
       this.webSocket.send(JSON.stringify(reservation));
-      this.webSocket.close();
-      console.log('in the socket')
+
+      console.log('Message sent: stopping CreateReservationWebSocketService socket')
+      this.stop();
     };
 
     this.webSocket.onerror = (event: Event) => {
-      console.error('WebSocket error observed: %o', event);
+      console.error('WebSocket error observed in CreateReservationWebSocketService: %o', event);
     };
 
     this.webSocket.onclose = (closeEvent: CloseEvent) => {
-      console.info('WebSocket connection has been closed: %o', closeEvent);
+      console.info('CreateReservationWebSocketService connection has been closed: %o', closeEvent);
+      this.webSocket = undefined;
     };
   }
 }

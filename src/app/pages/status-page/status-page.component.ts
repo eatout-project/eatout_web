@@ -16,6 +16,7 @@ export class StatusPageComponent implements OnInit, OnDestroy {
 
   reservations = new BehaviorSubject<ReservationResponseApiObject[]>([]);
   onDestroyed$ = new Subject<void>();
+  // @ts-ignore
   customerId: number;
 
   constructor(
@@ -28,17 +29,12 @@ export class StatusPageComponent implements OnInit, OnDestroy {
     const storedCustomerString: string | null = localStorage.getItem('customer');
     // @ts-ignore
     const customer: Customer = JSON.parse(storedCustomerString);
-    this.customerId = customer.id ?? 1;
-    // if (!!storedCustomerString) {
-    //   this.accountService.verifyAccount(customer.id).pipe(take(1)).subscribe(verified => {
-    //     if (!verified) {
-    //       localStorage.setItem('customer', '');
-    //       this.router.navigate(['']);
-    //     }
-    //   })
-    // } else {
-    //   this.router.navigate(['']);
-    // }
+    if (customer.id) {
+      this.customerId = customer.id ?? 1;
+    } else {
+      localStorage.setItem('customer', '');
+      this.router.navigate(['']);
+    }
   }
 
   ngOnInit(): void {
