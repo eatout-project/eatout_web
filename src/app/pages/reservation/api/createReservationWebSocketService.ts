@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ReservationApiObject} from "./reservation.api";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class CreateReservationWebSocketService {
   public start(reservation: ReservationApiObject): void {
     if (this.webSocket === undefined) {
       console.log('Going to connect to the CreateReservationWebSocketService server');
-      this.connect('ws://localhost:5010', reservation);
+      this.connect(environment.CREATE_RESERVATION_SOCKET_HOST_URL, reservation);
     }
   }
 

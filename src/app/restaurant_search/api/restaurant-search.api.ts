@@ -6,6 +6,7 @@ import {Category} from "../../objects/businessObjects/Category";
 import {Menu} from "../../objects/businessObjects/Menu";
 import {CategoryItem} from "../../objects/businessObjects/CategoryItem";
 import {Address} from "../../objects/businessObjects/Address";
+import {environment} from "../../../environments/environment";
 
 interface RestaurantApiObject {
   id: number;
@@ -43,15 +44,12 @@ export interface RestaurantAddressApiObject {
   providedIn: 'root'
 })
 export class RestaurantSearchApi {
+
   constructor(private readonly eatoutHttpClientService: EatoutHttpClient) {}
 
-  // getRestaurants(): Observable<Restaurant[]> {
-  //   return this.eatoutHttpClientService.get<RestaurantApiObject[]>(`restaurant-service-cluster-ip-service:5000/browsingList`)
-  //     .pipe(map((result) => this.restaurantApiObjectToRestaurant(result)));
-  // }
-
   getRestaurants(): Observable<Restaurant[]> {
-    return this.eatoutHttpClientService.get<RestaurantApiObject[]>(`http://localhost:5000/browsinglist`)
+    const url: string = environment.RESTAURANT_SERVICE_HOST_URL;
+    return this.eatoutHttpClientService.get<RestaurantApiObject[]>(url + `/browsinglist`)
       .pipe(map((result) => this.restaurantApiObjectToRestaurant(result)));
   }
 

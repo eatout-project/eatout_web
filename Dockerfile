@@ -1,12 +1,11 @@
-FROM node
+FROM node:alpine AS build
 WORKDIR /app
-COPY ./angular.json /app
-COPY ./package.json /app
-COPY ./src /app/src
-COPY ./.angular /app
-COPY ./tsconfig.json /app
-COPY ./tsconfig.app.json /app
+COPY . .
 RUN npm install
-RUN npm install -g @angular/cli
-EXPOSE 4200
-CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200"]
+RUN npm run build --configuration=production
+# RUN file="$(ls -1 /app/dist)" && echo $file
+# Serve Application using Nginx Server
+FROM nginx:alpine
+COPY --from=build /app/dist/eatout_web/ /usr/share/nginx/html
+COPY /nginx.conf  /etc/nginx/conf.d/default.conf
+EXPOSE 80

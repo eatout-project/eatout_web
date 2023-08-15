@@ -19,7 +19,6 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatLegacyInputModule as MatInputModule} from "@angular/material/legacy-input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatLegacyButtonModule as MatButtonModule} from "@angular/material/legacy-button";
-import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
 import {NzTimePickerModule} from 'ng-zorro-antd/time-picker';
 import {da_DK, NZ_I18N} from 'ng-zorro-antd/i18n';
 import {registerLocaleData} from '@angular/common';
@@ -65,7 +64,6 @@ registerLocaleData(da);
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    NgxMatTimepickerModule.setLocale('da-DK'),
     NzTimePickerModule
   ],
   providers: [

@@ -4,20 +4,22 @@ import {map, Observable, take} from "rxjs";
 import {CreateAccountFormObject} from "../create-account/create-account.component";
 import {Customer} from "../../../objects/businessObjects/Customer";
 import {LoginData} from "../LoginPage/login/login.component";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountApi {
+  url: string = environment.CUSTOMER_SERVICE_HOST_URL;
   constructor(private readonly eatoutHttpClientService: EatoutHttpClient) {}
 
   createAccount(customer: CreateAccountFormObject): Observable<Customer> {
-    return this.eatoutHttpClientService.post<Customer>(`http://localhost:5004/create-account`, customer)
+    return this.eatoutHttpClientService.post<Customer>(this.url + '/create-account', customer)
       .pipe(take(1), map((result) => result));
   }
 
   login(formData: LoginData) {
-    return this.eatoutHttpClientService.post<Customer>(`http://localhost:5004/login`, formData)
+    return this.eatoutHttpClientService.post<Customer>(this.url + `/login`, formData)
       .pipe(take(1), map(result => result));
   }
 
@@ -25,7 +27,6 @@ export class AccountApi {
     const body = {
       id: customerId
     }
-    // return this.eatoutHttpClientService.post<boolean>(`customer-service-cluster-ip-service:5004/verifyAccount`, body);
-    return this.eatoutHttpClientService.post<boolean>(`http://localhost:5004/verifyAccount`, body);
+    return this.eatoutHttpClientService.post<boolean>(this.url + `/verifyAccount`, body);
   }
 }

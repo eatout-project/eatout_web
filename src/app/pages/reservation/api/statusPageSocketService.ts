@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ReservationResponseApiObject} from "./reservation.api";
 import {ReservationStore} from "../../../stores/reservationStore";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,11 @@ export class StatusPageSocketService {
   }
 
   public start(customerId: number): void {
-    this.connect('ws://localhost:5013', customerId);
+    this.connect(environment.STATUS_SOCKET_HOST_URL, customerId);
   }
 
-  private connect(partialUrl: string, customerId: number): void {
-    this.webSocket = new WebSocket(partialUrl);
+  private connect(url: string, customerId: number): void {
+    this.webSocket = new WebSocket(url);
 
     this.webSocket.onopen = (event: Event) => {
       this.webSocket.send(JSON.stringify(customerId));

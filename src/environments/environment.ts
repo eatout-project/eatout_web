@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  RESTAURANT_SERVICE_HOST_URL: '',
+  RESERVATION_SERVICE_HOST_URL: '',
+  CUSTOMER_SERVICE_HOST_URL: '',
+  CREATE_RESERVATION_SOCKET_HOST_URL: '',
+  STATUS_SOCKET_HOST_URL: '',
 };
 
 /*

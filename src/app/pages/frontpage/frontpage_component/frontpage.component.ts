@@ -46,7 +46,8 @@ export class FrontpageComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   logOut() {
     localStorage.clear();
