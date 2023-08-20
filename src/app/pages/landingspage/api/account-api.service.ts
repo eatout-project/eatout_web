@@ -1,10 +1,9 @@
 import {Injectable} from "@angular/core";
 import {EatoutHttpClient} from "../../../services/eatout-http-client";
 import {map, Observable, take} from "rxjs";
-import {CreateAccountFormObject} from "../create-account/create-account.component";
 import {Customer} from "../../../objects/businessObjects/Customer";
-import {LoginData} from "../LoginPage/login/login.component";
 import {environment} from "../../../../environments/environment";
+import {CreateAccountFormObject, LoginData} from "../../../objects/businessObjects/AccountForms";
 
 @Injectable({
   providedIn: 'root'

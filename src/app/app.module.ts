@@ -11,7 +11,7 @@ import {MenuItemCardComponent} from './menu/menu-item-card/menu-item-card.compon
 import {HttpClientModule} from "@angular/common/http";
 import {RestaurantSearchFacade} from "./restaurant_search/restaurant-search.facade";
 import {ReservationPageComponent} from './pages/reservation/reservation-page/reservation-page.component';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatLegacyFormFieldModule as MatFormFieldModule} from "@angular/material/legacy-form-field";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
@@ -25,8 +25,7 @@ import {registerLocaleData} from '@angular/common';
 import da from '@angular/common/locales/da';
 import {StatusPageComponent} from './pages/status-page/status-page.component';
 import {ReservationFacade} from "./pages/reservation/reservation.facade";
-import {LoginComponent} from './pages/account/LoginPage/login/login.component';
-import {CreateAccountComponent} from './pages/account/create-account/create-account.component';
+import { LandingspageComponent } from './pages/landingspage/landingspage.component';
 
 registerLocaleData(da);
 
@@ -41,18 +40,17 @@ registerLocaleData(da);
     MenuItemCardComponent,
     ReservationPageComponent,
     StatusPageComponent,
-    LoginComponent,
-    CreateAccountComponent,
+    LandingspageComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       {path: 'statuspage', component: StatusPageComponent},
       {path: 'restaurantpage', component: RestaurantpageComponent},
       {path: 'reservationpage', component: ReservationPageComponent},
       {path: 'frontPage', component: FrontpageComponent},
-      {path: 'login', component: LoginComponent},
-      {path: '', component: CreateAccountComponent},
+      {path: '', component: LandingspageComponent},
     ]),
     HttpClientModule,
     NoopAnimationsModule,

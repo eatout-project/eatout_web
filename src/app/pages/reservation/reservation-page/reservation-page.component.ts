@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 import {ReservationStatus} from "../../../enums/enums";
 import {ReservationResponseApiObject} from "../api/reservation.api";
 import {ReservationStore} from "../../../stores/reservationStore";
-import {Customer_accountService} from "../../account/customer_account.service";
+import {Customer_accountService} from "../../landingspage/customer_account.service";
 import {CreateReservationWebSocketService} from "../api/createReservationWebSocketService";
 
 

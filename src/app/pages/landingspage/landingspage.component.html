@@ -1,0 +1,92 @@
+<header class="header">
+  <div class="logo-box">
+    <img src="assets/img/logo-white.png" alt="Logo" class="logo">
+  </div>
+
+  <div class="text-box">
+    <h1 class="heading-primary">
+      <span class="heading-primary--main">Eating out</span>
+      <span class="heading-primary--sub">Feast on Unforgettable Experiences</span>
+    </h1>
+    <form class="form-address" [formGroup]="addressForm">
+      <div class="flex-center u-margin-2 ">
+        <input type="text" class="form__input" placeholder="Type your address or zipcode"
+               id="address" formControlName="address" required>
+        <label for="address" class="form__label">
+
+        </label>
+      </div>
+    </form>
+    <button class="btn btn--animated btn--white" (click)="openLoginDialog()">Start exploring now</button>
+  </div>
+</header>
+
+<section class="section-browsing">
+  <div class="book">
+    <div class="book__form">
+      <form class="form" [formGroup]="newProfileForm" *ngIf="displaySignInForm">
+        <div class="u-margin-bottom-2">
+          <h2 class="heading-secondary">
+            Sign up for tons of opportunities
+          </h2>
+        </div>
+
+        <div class="form__group">
+          <input type="text" class="form__input" placeholder="First name" id="first-name" formControlName="firstName" required>
+          <label for="first-name" class="form__label" >First name</label>
+        </div>
+        <div class="form__group">
+          <input type="text" class="form__input" placeholder="Last name" id="last-name" formControlName="lastName" required>
+          <label for="last-name" class="form__label">Last name</label>
+        </div>
+        <div class="form__group">
+          <input type="email" class="form__input" placeholder="Email" id="new_email" formControlName="new_email" required>
+          <label for="new_email" class="form__label">Email</label>
+        </div>
+        <div class="form__group">
+          <input type="tel" class="form__input" placeholder="Phone" id="phone" formControlName="phone" required>
+          <label for="phone" class="form__label">Phone</label>
+        </div>
+        <div class="form__group">
+          <input type="password" class="form__input" placeholder="Password" id="password" formControlName="password" required>
+          <label for="password" class="form__label">Password</label>
+        </div>
+        <div class="form__group flex-center">
+          <button class="btn green" (click)="postRegister()">Register</button>
+        </div>
+
+        <div class="flex-center">
+          <span class="existing-account">
+            Already have an account? <button class="hyperlink" (click)="showLoginForm()">Sign in instead</button>
+          </span>
+        </div>
+      </form>
+
+      <form class="form" [formGroup]="signInForm" *ngIf="!displaySignInForm">
+        <div class="u-margin-bottom-2">
+          <h2 class="heading-secondary">
+            Sign up for tons of opportunities
+          </h2>
+        </div>
+
+        <div class="form__group">
+          <input type="email" class="form__input" placeholder="Email" id="signin_email" formControlName="signin_email" required>
+          <label for="signin_email" class="form__label" >Username</label>
+        </div>
+        <div class="form__group">
+          <input type="password" class="form__input" placeholder="Last name" id="password-login" formControlName="password" required>
+          <label for="last-name" class="form__label">Last name</label>
+        </div>
+        <div class="form__group flex-center">
+          <button class="btn green" (click)="postLogin()">Sign in</button>
+        </div>
+
+        <div class="flex-center">
+          <span class="existing-account">
+            Don't have an account? <button class="hyperlink" (click)="showSignInForm()">Sign up instead</button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

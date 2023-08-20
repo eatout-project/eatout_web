@@ -1,9 +1,8 @@
 import {AccountApi} from "./api/account-api.service";
-import {CreateAccountFormObject} from "./create-account/create-account.component";
 import {Observable} from "rxjs";
 import {Customer} from "../../objects/businessObjects/Customer";
 import {Injectable} from "@angular/core";
-import {LoginData} from "./LoginPage/login/login.component";
+import {CreateAccountFormObject, LoginData} from "../../objects/businessObjects/AccountForms";
 
 @Injectable({
   providedIn: 'root'

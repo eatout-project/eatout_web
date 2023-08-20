@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-dev": "ng build --configuration development",
+    "build-prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -22,6 +24,7 @@
     "@angular/router": "^16.2.0",
     "angular-moment-picker": "^0.10.2",
     "ng-zorro-antd": "^16.1.0",
+    "normalize.css": "^8.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.1"

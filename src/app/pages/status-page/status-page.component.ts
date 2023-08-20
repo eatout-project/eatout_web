@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject, Subject, take, takeUntil} from "rxjs";
 import {ReservationStore} from "../../stores/reservationStore";
-import {Customer_accountService} from "../account/customer_account.service";
+import {Customer_accountService} from "../landingspage/customer_account.service";
 import {Router} from "@angular/router";
 import {Customer} from "../../objects/businessObjects/Customer";
 import {ReservationApi, ReservationResponseApiObject} from "../reservation/api/reservation.api";

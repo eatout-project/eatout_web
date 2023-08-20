@@ -1,0 +1,36 @@
+:root {
+  --color-primary: #{$color-primary};
+  --color-primary-light: #{$color-primary-light};
+  --color-dark: #{$color-dark};
+  --color-dark-light: #{$color-dark-light};
+  --color-gray: #{$color-gray};
+  --color-gray-light: #{$color-gray-light};
+  --color-gray-dark: #{$color-gray-dark};
+  --color-white: #{$color-white};
+  --color-white-dark: #{$color-white-dark};
+  --color-red: #{$color-red};
+  --color-red-light: #{$color-red-light};
+  --color-blue: #{$color-blue};
+  --color-blue-light: #{$color-blue-light};
+  --color-black: #{$color-black};
+  --shadow-base: #{map-get($shadows, "base")};
+  --ff-lato: #{$lato}
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: $lato;
+  font-size: map-get($fs, "sm");
+  font-weight: map-get($fw, "normal");
+  color: #777;
+  padding: 30px;
+}

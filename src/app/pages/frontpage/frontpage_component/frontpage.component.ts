@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RestaurantSearchFacade} from "../../../restaurant_search/restaurant-search.facade";
 import {Restaurant} from "../../../objects/businessObjects/Restaurant";
 import {BehaviorSubject, Observable, Subject, take, takeUntil} from "rxjs";
-import {Customer_accountService} from "../../account/customer_account.service";
+import {Customer_accountService} from "../../landingspage/customer_account.service";
 import {Customer} from "../../../objects/businessObjects/Customer";
 import {Router} from "@angular/router";
 import {RestaurantStore} from "../../../restaurant_search/restaurant-store";
@@ -16,6 +16,13 @@ import {RestaurantStore} from "../../../restaurant_search/restaurant-store";
 export class FrontpageComponent implements OnInit {
   topics: string[] = ['Indian', 'Mexican', 'Danish', 'Sri Lankan', 'American', 'Iranian', 'Russian', 'Chinese'];
   restaurantList: Observable<Restaurant[]>;
+  // restaurantList: BehaviorSubject<Restaurant[]> = new BehaviorSubject([
+  //   {
+  //     id: 1,
+  //     name: 'string',
+  //     description: "string",
+  //   }
+  // ]);
   found: Subject<boolean> = new BehaviorSubject<boolean>(false);
   private onDestroyed$ = new Subject();
 
@@ -43,7 +50,6 @@ export class FrontpageComponent implements OnInit {
         this.found.next(true);
       }
     })
-
   }
 
   ngOnInit(): void {
